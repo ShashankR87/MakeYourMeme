@@ -1,0 +1,75 @@
+$red : rgb(223, 64, 37);
+
+
+
+* {
+    box-sizing: border-box;
+  }
+body{
+    margin:0
+}
+@mixin column ($percentage){
+    flex: $percentage;
+    max-width: $percentage;
+    padding: 0 4px;
+}
+.hero{
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    margin: 0;
+    position: relative;
+    background: lightcoral;
+    &__text{
+        position: relative;
+        top: 30%;
+        color: $red;
+    }
+}
+.options{
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 4px;
+    }
+    .column{
+        @include column(25%);
+
+        img{
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+    }
+    
+    @media screen and (max-width: 800px) {
+        .column{
+            @include column(50%);
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .column{
+            @include column(100%);
+        }
+    }
+    [type=radio]{
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    [type=radio] + img{
+        cursor: pointer;
+    }
+    [type=radio]:checked + img{
+        outline: 10px solid $red;
+    }
+    
+    
+
+    
+}
+.result{
+    display: flex;
+    justify-content: center;
+}
