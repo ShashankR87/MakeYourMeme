@@ -18,31 +18,36 @@
             </div>
         </div>
         
+        
         <div class="options">
             <form method="POST">
                 <div class = "row">
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[0]}}" onclick="update(this)">
-                            <img src = {{memeU[0]}}>
+                            <img src = {{memeU[0][0]}}>
+                            <button type="submit" formaction="/memeWeb/{{memeU[0][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[1]}}"onclick="update(this)">
-                            <img src = "{{memeU[1]}}">
+                            <img src = "{{memeU[1][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[1][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[2]}}"onclick="update(this)">
-                            <img src = "{{memeU[2]}}">
+                            <img src = "{{memeU[2][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[2][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[3]}}"onclick="update(this)">
-                            <img src = "{{memeU[3]}}">
+                            <img src = "{{memeU[3][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[3][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
 
@@ -54,25 +59,29 @@
                         
                         <input type="checkbox" name = "meme" value="{{memeID[4]}}" id="{{memeID[4]}}"onclick="update(this)">
                         <label class="container" for="{{memeID[4]}}">
-                            <img src = {{memeU[4]}}>
+                            <img src = {{memeU[4][0]}}>
+                            <button type="submit" formaction="/memeWeb/{{memeU[4][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[5]}}"onclick="update(this)">
-                            <img src = "{{memeU[5]}}">
+                            <img src = "{{memeU[5][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[5][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[6]}}"onclick="update(this)">
-                            <img src = "{{memeU[6]}}">
+                            <img src = "{{memeU[6][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[6][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
                     <div class="column">
                         <label class="container">
                             <input type="checkbox" name = "meme" value="{{memeID[7]}}"onclick="update(this)">
-                            <img src = "{{memeU[7]}}">
+                            <img src = "{{memeU[7][0]}}">
+                            <button type="submit" formaction="/memeWeb/{{memeU[7][1]}}" formmethod="GET"><i class="fa fa-search" style="font-size:20px; color:rgb(223, 64, 37);"></i></button>
                         </label>
                     </div>
 

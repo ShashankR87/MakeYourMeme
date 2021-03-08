@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, url_for, session, redirect, send_file
+from flask import Flask, render_template, request, url_for, session, redirect, send_file, jsonify
 import requests
 import urllib.request
 import webbrowser
+from flask_restful import Resource, Api
 
 resp = requests.get('https://api.imgflip.com/get_memes')
 if resp.status_code != 200:
@@ -17,13 +18,62 @@ for item in data["memes"]:
     if cnt == 8:
         break
     if item["box_count"] == 2:
-        memes[item["id"]] = item["url"]
+        memes[item["id"]] = [item["url"], item["name"]]
         cnt += 1
 
 
 print(memes.values())
 app = Flask(__name__)
 app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
+
+api = Api(app)
+
+class MemeClass(Resource):
+    def get(self, name):
+        resp = requests.get('https://api.imgflip.com/get_memes')
+        if resp.status_code != 200:
+            print('Error')
+
+        resp = resp.json()
+        data = resp["data"]
+        item = [d for d in data["memes"] if d["name"] == name]
+        if len(item) == 0:
+            item.append(dict())
+            item[0]["status"] = 'Error'
+            item[0]["desc"] = "No such meme found."
+            return jsonify(item)
+        else:
+            item[0]["status"] = 'OK'
+            memename = item[0]["name"]
+            memew = item[0]["width"]
+            memeh = item[0]["height"]
+            memeb = item[0]["box_count"]
+            memeu = item[0]["url"]
+            return jsonify(item)
+            
+api.add_resource(MemeClass, '/meme/<name>')
+
+@app.route('/memeWeb/<name>', methods=['GET'])
+def memeWeb(name):
+    resp = requests.get('https://api.imgflip.com/get_memes')
+    if resp.status_code != 200:
+        print('Error')
+
+    resp = resp.json()
+    data = resp["data"]
+    item = [d for d in data["memes"] if d["name"] == name]
+    if len(item) == 0:
+        return render_template('meme.html',name = '', w = '', h = '', b = '', u = '')
+    else:
+        memename = item[0]["name"]
+        memew = item[0]["width"]
+        memeh = item[0]["height"]
+        memeb = item[0]["box_count"]
+        memeu = item[0]["url"]
+        return render_template('meme.html',name = memename, w = memew, h = memeh, b = memeb, u = memeu)
+    
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
