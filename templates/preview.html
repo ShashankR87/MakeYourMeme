@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Make your Meme!</title>
+        <meta name="viewport" content="width: device-width">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="hero">
+            
+            <h1 class="hero__text">Preview</h1>
+            <div class="items">
+                <div class="cirlce">
+                    <p class="item__text" id="cartcount" style="color: white;">0</p>
+                </div>
+                
+                <i class="fa fa-shopping-cart" style="font-size:30px; color:rgb(223, 64, 37);"></i>
+            </div>
+        </div>
+        
+        <br>
+        <br>
+        <div class="options">
+            <form method="POST">
+                {%for i in range(numOfMemes)%}
+                <div class = "row">
+                    <div class="column">
+                        <label class="container">
+                            
+                            <img src = {{memeU[i]}}>
+                        </label>
+                    </div>
+                    <div class="column">
+                        <br>
+                        <br>
+                        <input type="text" name="{{memeID[i]}} 0" placeholder="First text box" required>
+                        <br>
+                        <br>
+
+                        <input type="text" name="{{memeID[i]}} 1" placeholder="Second text box" required>  
+                    </div>
+                    <div class="column">
+                        <br>
+                        <br>
+                        <button type="submit" name="{{memeID[i]}} edit" value="Edit Text" style="background-color: lightcoral;"><i class="fa fa-pencil" style="font-size:30px; color:rgb(223, 64, 37);"></i> </button> 
+                    </div>
+                    <div class="column">
+                        <br>
+                        <br>
+                        <button type="submit" name="{{memeID[i]}} rem" value="Remove" style="background-color: lightcoral;"><i class="fa fa-times" style="font-size:30px; color:rgb(223, 64, 37);"></i> </button> 
+                    </div>
+                    
+                </div>
+                {%endfor%}
+            </form>
+
+        </div>
+        {%if res!=''%}
+        <div class="result">
+            <img src="{{res}}">
+        </div>
+        {%endif%}
+        
+    </body>
+    <script>
+        var cartitems = '{{numOfMemes}}';
+        document.getElementById('cartcount').innerHTML = cartitems;
+
+
+    </script>
+</html>

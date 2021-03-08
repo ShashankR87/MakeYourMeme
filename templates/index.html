@@ -3,37 +3,45 @@
     <head>
         <title>Make your Meme!</title>
         <meta name="viewport" content="width: device-width">
-        <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div class="hero">
             <h1 class="hero__text">Make your Meme!</h1>
+            <div class="items">
+                <div class="cirlce">
+                    <p class="item__text" id="cartcount" style="color: white;">0</p>
+                </div>
+                
+                <i class="fa fa-shopping-cart" style="font-size:30px; color:rgb(223, 64, 37);"></i>
+            </div>
         </div>
         
         <div class="options">
             <form method="POST">
                 <div class = "row">
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[0]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[0]}}" onclick="update(this)">
                             <img src = {{memeU[0]}}>
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[1]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[1]}}"onclick="update(this)">
                             <img src = "{{memeU[1]}}">
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[2]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[2]}}"onclick="update(this)">
                             <img src = "{{memeU[2]}}">
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[3]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[3]}}"onclick="update(this)">
                             <img src = "{{memeU[3]}}">
                         </label>
                     </div>
@@ -43,26 +51,27 @@
                 </div>
                 <div class = "row">
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[4]}}">
+                        
+                        <input type="checkbox" name = "meme" value="{{memeID[4]}}" id="{{memeID[4]}}"onclick="update(this)">
+                        <label class="container" for="{{memeID[4]}}">
                             <img src = {{memeU[4]}}>
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[5]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[5]}}"onclick="update(this)">
                             <img src = "{{memeU[5]}}">
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[6]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[6]}}"onclick="update(this)">
                             <img src = "{{memeU[6]}}">
                         </label>
                     </div>
                     <div class="column">
-                        <label>
-                            <input type="radio" name = "meme" value="{{memeID[7]}}">
+                        <label class="container">
+                            <input type="checkbox" name = "meme" value="{{memeID[7]}}"onclick="update(this)">
                             <img src = "{{memeU[7]}}">
                         </label>
                     </div>
@@ -74,25 +83,29 @@
                 <br>
                 
                 <center>
-                <input type="text" name="text0" placeholder="First text box">
-                <br>
-                <br>
-
-                <input type="text" name="text1" placeholder="Second text box">
-                <br>
-                <br>
-                <input type="Submit">
+                <input type="Submit" value="Edit!">
                 </center>
             </form>
 
         </div>
-        {%if res!=''%}
-        <div class="result">
-            <img src="{{res}}">
-        </div>
-        {%endif%}
+        <br>
+        <br>
+        <br>
         
     </body>
+    <script>
+        var cartitems = 0
+        function update(checkbox){
+            if(checkbox.checked){
+                cartitems += 1
+            }
+            else{
+                cartitems -= 1
+            }
+            document.getElementById('cartcount').innerHTML = cartitems;
+        }
+
+    </script>
 
 
 </html>

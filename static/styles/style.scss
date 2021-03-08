@@ -1,4 +1,4 @@
-$red : rgb(223, 64, 37);
+$red : rgb(218, 40, 40);
 
 
 
@@ -20,10 +20,17 @@ body{
     margin: 0;
     position: relative;
     background: lightcoral;
-    &__text{
+    .hero__text{
         position: relative;
         top: 30%;
         color: $red;
+    }
+    .items{
+        float: right;
+        position: absolute;
+        top: 30%;
+        left: 90%;
+
     }
 }
 .options{
@@ -52,24 +59,43 @@ body{
             @include column(100%);
         }
     }
-    [type=radio]{
+    
+    [type=checkbox]:before{
         position: absolute;
         opacity: 0;
         width: 0;
         height: 0;
+        display: none;
+        visibility: hidden;
     }
-    [type=radio] + img{
-        cursor: pointer;
+    [type=checkbox]:before + img{
+        display: inline-block;	
+        width: 60px;
+        height: 30px;
+        cursor: pointer;	
+        
     }
-    [type=radio]:checked + img{
+    [type=checkbox]:after + img{
         outline: 10px solid $red;
     }
+
+    
+    
     
     
 
     
 }
+
 .result{
     display: flex;
     justify-content: center;
+}
+
+[type=submit]{
+    background-color:lightcoral;
+    color: $red;
+    border: none;
+    padding: 10px 24px;
+    font-size: 20px;
 }
