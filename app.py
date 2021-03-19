@@ -29,27 +29,44 @@ app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 api = Api(app)
 
 class MemeClass(Resource):
-    def get(self, name):
-        resp = requests.get('https://api.imgflip.com/get_memes')
-        if resp.status_code != 200:
-            print('Error')
+	def get(self, name):
+		selMeme = name[:name.index('&')]
+		name = name[name.index('&')+1:]
+		top = name[:name.index('&')]
+		name = name[name.index('&')+1:]
+		bottom = name
+		new_meme = {"template_id":selMeme,"username": username,"password":password,"text0":top,"text1":bottom}
+		resp = requests.post('https://api.imgflip.com/caption_image',params=new_meme)
+		if resp.json()['success'] != True:
+			return resp.json()['error_message']
+		else:
+			gen_url = resp.json()['data']['url']
+			item = dict()
+			item["url"] = gen_url
+			return jsonify(item)
 
-        resp = resp.json()
-        data = resp["data"]
-        item = [d for d in data["memes"] if d["name"] == name]
-        if len(item) == 0:
-            item.append(dict())
-            item[0]["status"] = 'Error'
-            item[0]["desc"] = "No such meme found."
-            return jsonify(item)
-        else:
-            item[0]["status"] = 'OK'
-            memename = item[0]["name"]
-            memew = item[0]["width"]
-            memeh = item[0]["height"]
-            memeb = item[0]["box_count"]
-            memeu = item[0]["url"]
-            return jsonify(item)
+
+		return name
+        # resp = requests.get('https://api.imgflip.com/get_memes')
+        # if resp.status_code != 200:
+        #     print('Error')
+
+        # resp = resp.json()
+        # data = resp["data"]
+        # item = [d for d in data["memes"] if d["name"] == name]
+        # if len(item) == 0:
+        #     item.append(dict())
+        #     item[0]["status"] = 'Error'
+        #     item[0]["desc"] = "No such meme found."
+        #     return jsonify(item)
+        # else:
+        #     item[0]["status"] = 'OK'
+        #     memename = item[0]["name"]
+        #     memew = item[0]["width"]
+        #     memeh = item[0]["height"]
+        #     memeb = item[0]["box_count"]
+        #     memeu = item[0]["url"]
+        #     return jsonify(item)
             
 api.add_resource(MemeClass, '/meme/<name>')
 
