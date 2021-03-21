@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, url_for, session, redirect, send_file, jsonify
 import requests
 import urllib.request
-import webbrowser
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
 
