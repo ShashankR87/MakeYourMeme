@@ -3,6 +3,8 @@ import requests
 import urllib.request
 import webbrowser
 from flask_restful import Resource, Api
+from flask_cors import CORS, cross_origin
+
 
 resp = requests.get('https://api.imgflip.com/get_memes')
 if resp.status_code != 200:
@@ -24,10 +26,11 @@ for item in data["memes"]:
 
 print(memes.values())
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 
 api = Api(app)
-
+@cross_origin()
 class MemeClass(Resource):
 	def get(self, name):
 		selMeme = name[:name.index('&')]
@@ -67,7 +70,7 @@ class MemeClass(Resource):
         #     memeb = item[0]["box_count"]
         #     memeu = item[0]["url"]
         #     return jsonify(item)
-            
+
 api.add_resource(MemeClass, '/meme/<name>')
 
 @app.route('/memeWeb/<name>', methods=['GET'])
@@ -88,7 +91,7 @@ def memeWeb(name):
         memeb = item[0]["box_count"]
         memeu = item[0]["url"]
         return render_template('meme.html',name = memename, w = memew, h = memeh, b = memeb, u = memeu)
-    
+
 
 
 
@@ -138,7 +141,7 @@ def checkout():
         session["selected_texts"] = texts
         return redirect(url_for('preview'))
 
-    
+
     return render_template('checkout.html',numOfMemes = len(selected_img),memeID=selected_img,memeU=selected_URL)
 
 
@@ -156,7 +159,7 @@ def preview():
             return resp.json()['error_message']
         else:
             gen_urls.append(resp.json()['data']['url'])
-    
+
 
 
     if request.method == 'POST':
@@ -175,9 +178,9 @@ def preview():
                 selected_texts[ind] = [memeid,t0,t1]
                 session["selected_texts"] = selected_texts
                 return redirect(url_for('preview'))
-            
-        
-            
+
+
+
 
 
         texts=[]
@@ -190,8 +193,8 @@ def preview():
         session["selected_texts"] = texts
         return redirect(url_for('preview'))
     return render_template('preview.html',numOfMemes = len(selected_img),memeID=selected_img,memeU=gen_urls)
-    
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
+
